@@ -14,3 +14,9 @@ post '/customers.json' do
   @customer = Customer.new(params)
   @customer.save
 end
+
+get '/customers/:id.json' do
+  content_type :json
+  @customer = Customer.find(params[:id])
+  @customer.to_json
+end
