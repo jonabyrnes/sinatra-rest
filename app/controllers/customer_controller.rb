@@ -31,5 +31,6 @@ end
 
 delete '/customers/:id.json' do
   @customer = Customer.find(params[:id])
-  @customer.destroy
+  @customer.destroy # mongo returns 'ok', etc
+  status 200
 end
