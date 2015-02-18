@@ -1,9 +1,12 @@
-# TODO: more dynamic way to serve static files
+# special case for the root
 get '/' do
-    File.read(File.join('app', 'assets/index.html'))
+  File.read('app/assets/index.html')
 end
 
-get '/app.js' do
-    content_type :js
-    File.read(File.join('app', 'assets/javascripts/app.js'))
+# and all other static content
+get '/*.*' do
+  parts = params[:splat]
+  if( parts[1] == 'js'); content_type :js end
+  File.read("app/assets/#{parts[0]}.#{parts[1]}")
 end
+
